@@ -1,0 +1,15 @@
+#!/bin/sh
+
+feh --bg-fill ~/dz/images/wallpaper.jpg
+setxkbmap pl -option caps:escape
+
+while true; do
+  ram=$(free -h | awk '/Mem/ {print ""$4"|"$7}')
+  volume="$(amixer get Master | awk '/Mono:/ {print substr($4, 2, length($4) - 2)}')"
+  battery="$(cat /sys/class/power_supply/BAT0/capacity)%"
+  date_time="$(date +'%Y-%m-%d %H:%M:%S')"
+  xsetroot -name "$ram   $volume   $battery   $date_time"
+  sleep 1s
+done &
+
+exec dwm
