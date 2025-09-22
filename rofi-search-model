@@ -1,0 +1,11 @@
+#!/bin/sh
+search-model() {
+  local model="$@"
+  local quoted_model="\"$model\""
+  nohup firefox-developer-edition \
+    "https://www.printables.com/search/models?q=$quoted_model&ordering=popular" \
+    "https://www.thingiverse.com/search?q=$quoted_model&sort=popular" \
+    "https://makerworld.com/en/search/models?keyword=$model&orderBy=score"
+}
+
+search-model $(rofi -dmenu)
